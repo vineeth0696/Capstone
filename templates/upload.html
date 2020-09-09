@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <title>Upload Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+<style type="text/css">
+form {
+ margin: 0;
+ padding: 1em 0;
+ border: 3px ridge lightgrey;
+}
+</style>
+
+<style>
+.btn {
+  background-color: #032457;
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: grey;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #032457;
+}
+</style>
+</head>
+<body>
+
+<table border="0" style="background-color: #003258;" width="100%">
+	<tbody><tr><td><img border="0" style="background none;"></td>
+	<td align="right"><strong><font color="white" face="Arial,sans-serif">Blood Bank</font></strong></td></tr>
+	</tbody>
+</table>
+
+<ul>
+  <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+  <li><a href="{{ url_for('donor_list') }}">Donors</a></li>
+  <li><a href="{{ url_for('receiver_list') }}">Receivers</a></li>
+</ul>
+
+    <div class="container">
+      <h1 align="center">Upload Details</h1>
+      <br>
+      <form id="uploadForm" action="" method="post" align="middle" onsubmit="window.location.reload()">
+	  
+	  	Category
+        <select required name="category" value="{{request.form.category}}">
+                        <option value="none" selected hidden> Select Category </option>
+                        <option value="Donor">Donor</option>
+						<option value="Receiver">Receiver</option>
+                </select>
+                </br></br>
+        Blood Type
+        <select required name="btype" value="{{request.form.btype}}">
+                        <option value="none" selected hidden> Select Blood Type </option>
+                        <option value="O+">O+</option>
+						<option value="O-">O-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="A+">A+</option>
+						<option value="A-">A-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+                </select>
+               </br></br>
+			   
+        Name
+        <input type="text" name="name" value="{{request.form.name}}"><br>
+                </br></br>
+				
+        Sex
+        <select required name="sex" value="{{request.form.sex}}">
+                        <option value="none" selected hidden> Select Sex </option>
+                        <option value="Female">Female</option>
+						<option value="Male">Male</option>
+                </select>
+                </br></br>
+
+        Age
+        <input type="text" name="age" value="{{request.form.age}}"><br>
+                </br></br>
+        Weight
+        <input type="text" name="weight" value="{{request.form.weight}}"><br>
+                </br></br>
+        Height
+        <input type="text" name="height" value="{{request.form.height}}"><br>
+                </br></br>
+        Mobile
+        <input type="text" name="mobile" value="{{request.form.mobile}}"><br>
+                </br></br>
+        Address
+        <input type="text" name="address" value="{{request.form.address}}"><br>
+                </br></br>
+
+        <input class="btn-default" type="submit" style="width:90px;height:30px" value="Upload">
+	{% if message %}
+	<script>
+	alert("{{ message }}");
+    </script>
+	{% endif %} 
+      </form>      
+    </div>
+  </body>
+</html>

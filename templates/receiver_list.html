@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <title>Documents List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+<style type="text/css">
+form {
+ margin: 0;
+ padding: 1em 0;
+ border: 3px ridge lightgrey;
+}
+
+.btn {
+  background-color: #032457;
+  border: none;
+  color: white;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: grey;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #032457;
+}
+</style>
+
+<style>
+
+.tbl {
+  border-collapse: collapse;
+  width: 100%;
+}
+.tbl th{
+  text-align: left;
+  padding: 10px;
+  background-color: #DFE0DF;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+  font-family: Arial,sans-serif;
+  color: black;
+}
+.tbl td{
+  text-align: left;
+  padding: 10px;
+}
+
+.tbl tr:nth-child(even){background-color: #f2f2f2}
+.tbl tr:hover {background-color: #D6DDFC;}
+</style>
+
+<table border="0" style="background-color: #003258;" width="100%">
+	<tbody><tr><td><img border="0" style="background none;"></td>
+	<td align="right"><strong><font color="white" face="Arial,sans-serif">Blood Bank</font></strong></td></tr>
+	</tbody>
+</table>
+<ul>
+  <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+  <li><a href="{{ url_for('upload') }}">Upload</a></li>
+  <li><a href="{{ url_for('donor_list') }}">Donors</a></li>
+</ul>
+
+    <div class="container" style="overflow-x:auto;">
+      <h1 align="center">Receivers List</h1>
+      <br>
+	  <form action="" method="post" align="middle" width="100%">
+		<table class="tbl" border="3" style="width:50" cellpadding="20" align="center">
+		<th>Category</th>
+		<th>Blood type</th>
+		<th>Name</th>
+		<th>Sex</th>
+		<th>Age</th>
+		<th>Weight</th>
+		<th>Height</th>
+		<th>Mobile</th>
+		<th>Address</th>
+		<h3> Receivers Available</h3>
+				{% for doc in doc_details_list %}
+					{% set dets = doc.split("::::") %}
+						<tr>
+						{% for det in dets %}
+							{% if "https" in det %}
+								<td><a href="{{ det }}">{{ det }}</a></td>
+							{% else %}
+								<td>{{ det }}</td>
+							{% endif %}
+						{% endfor %}
+						</tr>
+				{% endfor %}
+		</table>
+      </form>
+	</div>
+  </body>
+</html>
