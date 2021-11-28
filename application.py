@@ -1,9 +1,14 @@
 from flask import Flask, render_template, redirect, url_for, request
 import datetime
+import socket
 
 application = Flask(__name__)
 application.secret_key = "abc"  
 dict={}
+
+def get_host_address():
+    hostName = socket.gethostname()
+    return socket.gethostbyname(hostName)
 
 def file_to_list(filename):
 	file = open(filename,'r')
@@ -85,4 +90,4 @@ def receiver_list():
 	return render_template("receiver_list.html", doc_details_list=doc_details_list)
     
 if __name__ == '__main__':
-	application.run(host="127.0.0.1",port="5006",debug="True")
+	application.run(host=get_host_address(),port="5006",debug="True")
